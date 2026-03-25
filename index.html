@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>関西発！新アイドルグループ — メンバーオーディション</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Noto+Sans+JP:wght@300;400;500;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #e8f6ff;
+    --white: #ffffff;
+    --black: #1e3a5f;
+    --ice: #c8eeff;
+    --ice-deep: #a0d8f0;
+    --candy-pink: #ff6eb4;
+    --candy-green: #4dd9a0;
+    --candy-yellow: #ffe033;
+    --candy-orange: #ff8c42;
+    --candy-purple: #b97fff;
+    --blue-mid: #5bbde4;
+    --blue-dark: #1a7db5;
+    --text-muted: #7aaec8;
+    --glass: rgba(255,255,255,0.55);
+    --glass-border: rgba(255,255,255,0.8);
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Noto Sans JP', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--black);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 10% 20%, rgba(160,216,240,0.5) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 90% 80%, rgba(185,127,255,0.15) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(255,110,180,0.08) 0%, transparent 60%),
+      linear-gradient(160deg, #daf3ff 0%, #eef9ff 40%, #f5f0ff 100%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5vw;
+    background: rgba(220,245,255,0.7);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: var(--blue-dark);
+  }
+
+  .nav-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    background: linear-gradient(90deg, var(--candy-pink), var(--candy-purple));
+    color: #fff;
+    padding: 5px 14px;
+    border-radius: 99px;
+    letter-spacing: 0.1em;
+    animation: pulse-badge 2.2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-badge {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 9rem 5vw 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-dots { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+  .dot {
+    position: absolute;
+    border-radius: 50%;
+    animation: dot-float 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes dot-float {
+    from { transform: translateY(0) rotate(0deg); }
+    to   { transform: translateY(-18px) rotate(180deg); }
+  }
+
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--blue-dark);
+    letter-spacing: 0.18em;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    padding: 7px 18px;
+    border-radius: 99px;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(28px, 5.5vw, 80px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2rem;
+  }
+
+  .hero-title .l1 { display: block; color: var(--black); }
+  .hero-title .l2 {
+    display: block;
+    background: linear-gradient(135deg, var(--blue-mid), var(--candy-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-title .l3 {
+    display: block;
+    background: linear-gradient(135deg, var(--candy-pink), var(--candy-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-catchcopy {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(16px, 3vw, 24px);
+    color: var(--blue-dark);
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-jp {
+    font-size: clamp(13px, 2vw, 16px);
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    padding: 14px 32px;
+    border-radius: 99px;
+    transition: transform 0.18s, box-shadow 0.18s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn:hover { transform: translateY(-3px); }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue-mid), var(--candy-purple));
+    color: #fff;
+    box-shadow: 0 8px 28px rgba(91,189,228,0.35);
+  }
+  .btn-primary:hover { box-shadow: 0 14px 36px rgba(91,189,228,0.5); }
+
+  .btn-outline {
+    background: var(--glass);
+    color: var(--blue-dark);
+    border: 1.5px solid var(--ice-deep);
+    backdrop-filter: blur(8px);
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.8); }
+
+  .btn-line {
+    background: #06c755;
+    color: #fff;
+    font-size: 16px;
+    padding: 18px 52px;
+    box-shadow: 0 8px 28px rgba(6,199,85,0.3);
+  }
+  .btn-line:hover { box-shadow: 0 14px 40px rgba(6,199,85,0.5); }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 5vw; }
+
+  .section-label {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 800;
+    color: var(--candy-pink);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: clamp(14px, 2vw, 18px);
+    margin-bottom: 3rem;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  /* ── CONCEPT ── */
+  .concept-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+  }
+
+  .concept-card {
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    transition: transform 0.22s;
+  }
+
+  .concept-card:hover { transform: translateY(-5px); }
+
+  .cc-1 { background: rgba(255,110,180,0.1); }
+  .cc-2 { background: rgba(91,189,228,0.12); }
+  .cc-3 { background: rgba(255,224,51,0.12); }
+  .cc-4 { background: rgba(185,127,255,0.12); }
+
+  .cc-accent {
+    position: absolute;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    top: -24px; right: -24px;
+    opacity: 0.22;
+    filter: blur(22px);
+  }
+
+  .cc-1 .cc-accent { background: var(--candy-pink); }
+  .cc-2 .cc-accent { background: var(--blue-mid); }
+  .cc-3 .cc-accent { background: var(--candy-yellow); }
+  .cc-4 .cc-accent { background: var(--candy-purple); }
+
+  .concept-card .cc-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 64px;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    opacity: 0.1;
+    color: var(--black);
+  }
+
+  .concept-card h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 0.75rem;
+    color: var(--black);
+  }
+
+  .concept-card p { font-size: 13px; color: var(--text-muted); line-height: 1.85; }
+
+  /* ── MUSIC ── */
+  .music-tracks { display: flex; flex-direction: column; gap: 12px; }
+
+  .track {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .track:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(91,189,228,0.15); }
+  .track-embed { flex-direction: column; align-items: flex-start; }
+  .track-embed .track-num { margin-bottom: 4px; }
+  .track-embed .track-info { width: 100%; }
+  .track-embed iframe { border-radius: 10px; display: block; }
+
+  .track-num { font-family: var(--font-mono); font-size: 12px; color: var(--candy-pink); min-width: 24px; font-weight: 700; }
+  .track-info { flex: 1; }
+  .track-title { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+  .track-note { font-size: 12px; color: var(--text-muted); font-family: var(--font-mono); }
+
+  .track-placeholder {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    border: 1.5px dashed var(--ice-deep);
+    padding: 8px 16px;
+    border-radius: 99px;
+    white-space: nowrap;
+  }
+
+  .music-note {
+    margin-top: 1.5rem;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    line-height: 1.9;
+    background: rgba(91,189,228,0.1);
+    border-radius: 14px;
+    padding: 1rem 1.5rem;
+    border-left: 3px solid var(--blue-mid);
+  }
+
+  /* ── STRENGTHS ── */
+  .strengths-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+  }
+
+  .strength-item {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .strength-item:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(91,189,228,0.15); }
+
+  .strength-icon { font-size: 28px; margin-bottom: 1rem; display: block; }
+  .si-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    background: linear-gradient(135deg, var(--candy-pink), var(--candy-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255,110,180,0.3);
+    padding: 4px 10px;
+    border-radius: 99px;
+    -webkit-text-fill-color: unset;
+    color: var(--candy-pink);
+    font-size: 11px;
+  }
+  .strength-item h3 { font-size: 14px; font-weight: 700; margin-bottom: 0.5rem; }
+  .strength-item p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+
+  /* ── REQUIREMENTS ── */
+  .req-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .req-block {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 2.5rem;
+  }
+
+  .req-block h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, var(--blue-mid), var(--candy-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .req-list { list-style: none; display: flex; flex-direction: column; }
+
+  .req-list li {
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(160,216,240,0.4);
+  }
+
+  .req-list li:last-child { border-bottom: none; }
+
+  .req-list li::before {
+    content: '';
+    display: block;
+    width: 8px; height: 8px; min-width: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--candy-pink), var(--candy-orange));
+    margin-top: 7px;
+  }
+
+  /* ── FLOW ── */
+  .flow-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+  }
+
+  .flow-step {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    transition: transform 0.2s;
+  }
+
+  .flow-step:hover { transform: translateY(-4px); }
+
+  .step-num {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 1;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--blue-mid), var(--candy-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .flow-step h3 { font-size: 15px; font-weight: 700; margin-bottom: 0.5rem; }
+  .flow-step p { font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+
+  /* ── APPLY ── */
+  .apply-section {
+    text-align: center;
+    padding: 8rem 5vw;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #c8eeff 0%, #ddd6fe 50%, #fce7f3 100%);
+  }
+
+  .apply-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    pointer-events: none;
+  }
+
+  .ao-1 { width:350px;height:350px;background:var(--candy-pink);opacity:0.2;top:-80px;right:-60px; }
+  .ao-2 { width:280px;height:280px;background:var(--blue-mid);opacity:0.2;bottom:-60px;left:-60px; }
+  .ao-3 { width:200px;height:200px;background:var(--candy-yellow);opacity:0.18;top:40%;left:40%; }
+
+  .apply-section .section-label {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 4vw, 36px);
+    color: var(--candy-pink);
+    position: relative;
+    z-index: 1;
+  }
+
+  .apply-section .section-title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(48px, 10vw, 110px);
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--blue-dark), var(--candy-purple), var(--candy-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 1;
+    color: unset;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .apply-section > p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .apply-section .btn-line { position: relative; z-index: 1; }
+
+  .apply-note {
+    margin-top: 1.5rem;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 5vw;
+    border-top: 1px solid rgba(160,216,240,0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: rgba(220,245,255,0.6);
+    backdrop-filter: blur(10px);
+  }
+
+  footer p { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); }
+
+  /* ── SCROLL ANIMATION ── */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 680px) {
+    .req-grid { grid-template-columns: 1fr; }
+
+    /* NAV */
+    nav { padding: 0.9rem 4vw; }
+    .nav-logo { font-size: 12px; }
+
+    /* HERO */
+    .hero { padding: 7rem 6vw 4rem; min-height: 100svh; }
+    .hero-tag { font-size: 10px; padding: 6px 14px; letter-spacing: 0.12em; margin-bottom: 1.8rem; }
+    .hero-title { font-size: clamp(32px, 9vw, 52px); margin-bottom: 1.5rem; line-height: 1.1; }
+    .hero-catchcopy { font-size: 18px; }
+    .hero-jp { font-size: 13px; margin-bottom: 2rem; }
+    .hero-buttons { flex-direction: column; align-items: center; gap: 0.75rem; width: 100%; }
+    .btn { width: 100%; max-width: 280px; padding: 16px 24px; font-size: 15px; }
+    .btn-line { max-width: 280px; width: 100%; padding: 18px 24px; }
+
+    /* SECTIONS */
+    section { padding: 3.5rem 5vw; }
+    .section-label { font-size: clamp(20px, 6vw, 28px); }
+    .section-title { font-size: 13px; margin-bottom: 2rem; }
+
+    /* CONCEPT */
+    .concept-card { padding: 1.8rem 1.5rem; }
+
+    /* MUSIC */
+    .track { padding: 1.2rem 1rem; }
+    .track-num { font-size: 11px; }
+    .track-title { font-size: 13px; }
+
+    /* STRENGTHS */
+    .strengths-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .strength-item { padding: 1.5rem 1rem; }
+    .strength-item h3 { font-size: 12px; }
+    .strength-item p { font-size: 11px; }
+
+    /* REQUIREMENTS */
+    .req-block { padding: 1.8rem 1.5rem; }
+    .req-list li { font-size: 13px; padding: 10px 0; }
+
+    /* FLOW */
+    .flow-steps { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .flow-step { padding: 1.5rem 1rem; }
+    .step-num { font-size: 40px; margin-bottom: 0.6rem; }
+    .flow-step h3 { font-size: 13px; }
+    .flow-step p { font-size: 11px; }
+
+    /* APPLY */
+    .apply-section { padding: 5rem 5vw; }
+    .apply-section .section-title { font-size: clamp(42px, 12vw, 72px); }
+
+    /* FOOTER */
+    footer { flex-direction: column; text-align: center; gap: 0.5rem; padding: 1.5rem 5vw; }
+
+    /* dots 減らす */
+    .dot:nth-child(n+7) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">RING PRODUCTION</div>
+  <span class="nav-badge">AUDITION OPEN</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-dots">
+    <div class="dot" style="width:18px;height:18px;background:#ff6eb4;top:12%;left:8%;animation-delay:0s;animation-duration:5.5s;"></div>
+    <div class="dot" style="width:12px;height:12px;background:#ffe033;top:20%;left:18%;animation-delay:-1s;animation-duration:7s;"></div>
+    <div class="dot" style="width:22px;height:22px;background:#4dd9a0;top:8%;right:15%;animation-delay:-2s;animation-duration:6s;"></div>
+    <div class="dot" style="width:14px;height:14px;background:#b97fff;top:30%;right:8%;animation-delay:-0.5s;animation-duration:8s;"></div>
+    <div class="dot" style="width:10px;height:10px;background:#ff8c42;bottom:25%;left:10%;animation-delay:-3s;animation-duration:5s;"></div>
+    <div class="dot" style="width:20px;height:20px;background:#5bbde4;bottom:15%;right:12%;animation-delay:-1.5s;animation-duration:7.5s;"></div>
+    <div class="dot" style="width:8px;height:8px;background:#ff6eb4;top:55%;left:5%;animation-delay:-2.5s;animation-duration:6.5s;"></div>
+    <div class="dot" style="width:16px;height:16px;background:#ffe033;bottom:30%;right:20%;animation-delay:-4s;animation-duration:9s;"></div>
+    <div class="dot" style="width:28px;height:28px;top:15%;left:40%;animation-delay:-3s;animation-duration:8s;border:2px solid #ff6eb4;background:transparent;"></div>
+    <div class="dot" style="width:22px;height:22px;top:65%;right:6%;animation-delay:-1s;animation-duration:7s;border:2px solid #5bbde4;background:transparent;"></div>
+  </div>
+
+  <p class="hero-tag">✦ 関西発 · 新アイドルグループ · メンバー募集中</p>
+
+  <h1 class="hero-title">
+    <span class="l1">新アイドルグループ</span>
+    <span class="l2">オーディション</span>
+    <span class="l3">開催中！</span>
+  </h1>
+
+  <p class="hero-catchcopy">We live in the drop.</p>
+  <p class="hero-jp">人生のDROPをアイドルに。</p>
+
+  <div class="hero-buttons">
+    <a href="#apply" class="btn btn-primary">LINEで応募する →</a>
+    <a href="#about" class="btn btn-outline">詳細を見る</a>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section id="about">
+  <p class="section-label fade-in">✦ CONCEPT</p>
+  <h2 class="section-title fade-in">どんなグループ？</h2>
+  <div class="fade-in" style="max-width:680px;margin:0 auto 1.5rem;">
+    <h3 style="font-family:var(--font-display);font-weight:800;font-size:clamp(20px,3.5vw,32px);color:var(--blue-dark);letter-spacing:0.03em;">We live in the drop.</h3>
+  </div>
+  <div class="concept-cards fade-in" style="grid-template-columns: 1fr;">
+    <div class="concept-card cc-1" style="max-width: 680px; margin: 0 auto; width: 100%;">
+      <div class="cc-accent"></div>
+      <p style="font-size:clamp(14px,2.2vw,17px);color:var(--black);line-height:2;font-weight:400;letter-spacing:0.05em;">DROPとはサビ前の一番盛り上がる部分。「<span style="color:var(--candy-pink);font-weight:700;">We live in the drop.</span>」をグループコンセプトにし、人生のDROPをアイドルに。を目指している。サウンドコンセプトは「<span style="color:var(--candy-pink);font-weight:700;">FUTURE DROP POP</span>」としてEDMを中心とした可愛い楽曲を揃える。</p>
+    </div>
+  </div>
+</section>
+
+<!-- MUSIC -->
+<section>
+  <p class="section-label fade-in">✦ MUSIC</p>
+  <h2 class="section-title fade-in">楽曲を聴く</h2>
+  <div class="music-tracks fade-in">
+    <div class="track track-embed">
+      <span class="track-num">01</span>
+      <div class="track-info">
+        <p class="track-title" style="margin-bottom:10px;">Track 01</p>
+        <iframe
+          width="100%" height="80" scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ring-production/5h2yq6hcsbw7&color=%235bbde4&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
+        </iframe>
+      </div>
+    </div>
+    <div class="track track-embed">
+      <span class="track-num">02</span>
+      <div class="track-info">
+        <p class="track-title" style="margin-bottom:10px;">compass</p>
+        <iframe
+          width="100%" height="80" scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ring-production/compass&color=%235bbde4&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
+        </iframe>
+      </div>
+    </div>
+    <div class="track track-embed">
+      <span class="track-num">03</span>
+      <div class="track-info">
+        <p class="track-title" style="margin-bottom:10px;">spark loop</p>
+        <iframe
+          width="100%" height="80" scrolling="no" frameborder="no" allow="autoplay"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/ring-production/spark-loop&color=%235bbde4&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRENGTHS -->
+<section>
+  <p class="section-label fade-in">✦ WHY RING PRODUCTION</p>
+  <h2 class="section-title fade-in">事務所の強み</h2>
+  <div class="strengths-grid fade-in">
+    <div class="strength-item">
+      <span class="strength-icon si-num">01</span>
+      <h3>オリコンチャート実績</h3>
+      <p>meluQ『魔法少女取扱説明書』オリコン1位、SITRA.『みんなの妹』オリコン2位を獲得した確かなプロデュース力。</p>
+    </div>
+    <div class="strength-item">
+      <span class="strength-icon si-num">02</span>
+      <h3>年間100本以上のイベント</h3>
+      <p>自社制作のライブイベントを年間100本以上開催。ステージ経験をしっかり積める環境。</p>
+    </div>
+    <div class="strength-item">
+      <span class="strength-icon si-num">03</span>
+      <h3>自社ダンススタジオ完備</h3>
+      <p>大阪・心斎橋に自社スタジオを完備。アクセスしやすく、練習・レッスンに集中できる。</p>
+    </div>
+    <div class="strength-item">
+      <span class="strength-icon si-num">04</span>
+      <h3>自社撮影スタジオ完備</h3>
+      <p>普段の撮影やTikTok・Instagramなど用の撮影も24時間好きな時に使えます。コスプレも何百着と豊富。</p>
+    </div>
+    <div class="strength-item">
+      <span class="strength-icon si-num">05</span>
+      <h3>プロによるアートワーク</h3>
+      <p>衣装やアー写など一流のプロによるアートワークを採用しています。</p>
+    </div>
+    <div class="strength-item">
+      <span class="strength-icon si-num">06</span>
+      <h3>引っ越しなどの補助</h3>
+      <p>遠方より大阪への引越しを行う場合は費用の補助も行います。</p>
+    </div>
+  </div>
+</section>
+
+<!-- REQUIREMENTS -->
+<section id="requirements">
+  <p class="section-label fade-in">✦ REQUIREMENTS</p>
+  <h2 class="section-title fade-in">募集要項</h2>
+  <div class="req-grid fade-in">
+    <div class="req-block">
+      <h3>応募条件</h3>
+      <ul class="req-list">
+        <li>16歳〜28歳の女性</li>
+        <li>心身ともに健康な方</li>
+        <li>大阪・心斎橋のスタジオに来られる方</li>
+        <li>グループ活動に全力で取り組める方</li>
+        <li>ダンス・歌・ビジュアルどれかに自信がある方</li>
+      </ul>
+    </div>
+    <div class="req-block">
+      <h3>活動情報</h3>
+      <ul class="req-list">
+        <li>活動拠点：大阪</li>
+        <li>スタジオ：心斎橋</li>
+        <li>所属：RING PRODUCTION</li>
+        <li>ジャンル：EDM × アイドル</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section>
+  <p class="section-label fade-in">✦ AUDITION FLOW</p>
+  <h2 class="section-title fade-in">オーディションの流れ</h2>
+  <div class="flow-steps fade-in">
+    <div class="flow-step">
+      <div class="step-num">01</div>
+      <h3>LINEで応募</h3>
+      <p>下のボタンからLINEに飛び、必要事項を送ってください。</p>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">02</div>
+      <h3>書類選考</h3>
+      <p>写真・プロフィールをもとに選考。結果は個別にご連絡します。</p>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">03</div>
+      <h3>面接・実技</h3>
+      <p>心斎橋スタジオにて面接と実技審査を行います。</p>
+    </div>
+    <div class="flow-step">
+      <div class="step-num">04</div>
+      <h3>合格・加入</h3>
+      <p>合格者はグループのメンバーとして活動スタート！</p>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY -->
+<section class="apply-section" id="apply">
+  <div class="apply-orb ao-1"></div>
+  <div class="apply-orb ao-2"></div>
+  <div class="apply-orb ao-3"></div>
+  <p class="section-label fade-in">✦ APPLY NOW</p>
+  <a href="https://lin.ee/pcaxTlR" class="btn btn-line fade-in" target="_blank" rel="noopener">
+    LINE で応募する →
+  </a>
+  <p class="apply-note fade-in">※ 応募・オーディション参加は無料です。費用は一切かかりません。</p>
+</section>
+
+<footer>
+  <p>関西発 新アイドルグループ メンバーオーディション</p>
+  <p>© RING PRODUCTION · Osaka, Japan</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
